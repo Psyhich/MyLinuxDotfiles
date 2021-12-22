@@ -1,0 +1,192 @@
+# Mod1 = alt
+# Mod4 = win
+set $mod Mod4
+set $screen_locker "convert ~/Pictures/Wallpapers/current_screen_locker -resize 1920x1080! RGB:- | i3lock --raw=1920x1080:rgb --image /dev/stdin -e --nofork & xkb-switch -s us"
+set $scripts ~/.config/i3/scripts/
+
+# Setting powersaving
+exec_always --no-startup-id "$scripts/power_mode_startup.sh"
+
+exec_always --no-startup-id "/opt/bin/deadd-notification-center"
+
+# Setting langugage layouts
+exec_always "setxkbmap -layout us,ua"
+exec_always "setxkbmap -option 'grp:alt_shift_toggle'"
+exec_always "xkb-switch --i3"
+
+# Panel
+exec_always --no-startup-id "~/.config/polybar/launch.sh"
+
+# Fonts)
+font pango:3270Nerd Font Mono 12
+
+# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $screen_locker
+
+#============================================================================
+# BINDINGS
+# Terminal
+bindsym $mod+Return exec alacritty
+# Print screen
+bindsym Print exec screengrab
+
+# Sound
+#increase sound volume
+bindsym XF86AudioRaiseVolume exec "pactl set-sink-volume 0 +5%" 
+#decrease sound volume
+bindsym XF86AudioLowerVolume exec "pactl set-sink-volume 0 -5%" 
+# mute sound
+bindsym XF86AudioMute exec "pactl set-sink-mute 0 toggle" 
+
+# Brightness
+bindsym XF86MonBrightnessDown exec "xbacklight -10"
+bindsym XF86MonBrightnessUp exec "xbacklight +10"
+# bindsym doesn't work.. Turn off screen(not lock)
+bindcode --release 253 exec "xset dpms force off" 
+
+# Keyboard brightness
+bindsym XF86KbdBrightnessUp exec "$scripts/keyboardcontrol.sh up"
+bindsym XF86KbdBrightnessDown exec "$scripts/keyboardcontrol.sh down"
+
+# Touchpad toggle
+bindsym --release XF86TouchpadToggle exec "$scripts/touchpad_toggle.sh"
+
+# Lock screen
+bindsym Control+Mod1+L exec $screen_locker
+
+# Music controll
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+#============================================================================
+
+# WM Bindings
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+floating_modifier Mod1
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 exec "i3-msg workspace 1; i3-msg scratchpad show"
+bindsym $mod+2 exec "i3-msg workspace 2; i3-msg scratchpad show"
+bindsym $mod+3 exec "i3-msg workspace 3; i3-msg scratchpad show"
+bindsym $mod+4 exec "i3-msg workspace 4; i3-msg scratchpad show"
+bindsym $mod+5 exec "i3-msg workspace 5; i3-msg scratchpad show"
+bindsym $mod+6 exec "i3-msg workspace 6; i3-msg scratchpad show"
+bindsym $mod+7 exec "i3-msg workspace 7; i3-msg scratchpad show"
+bindsym $mod+8 exec "i3-msg workspace 8; i3-msg scratchpad show"
+bindsym $mod+9 exec "i3-msg workspace 9; i3-msg scratchpad show"
+bindsym $mod+0 exec "i3-msg workspace 10; i3-msg scratchpad show"
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+#============================================================================
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+# Dark theme
+# class                 border  bground text    indicator child_border
+client.focused          #2F343F #2F343F #F8F8F2 #6272A4   #2F343F
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
+client.unfocused        #44475A #44475A #BFBFBF #282A36   #2E343D
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36

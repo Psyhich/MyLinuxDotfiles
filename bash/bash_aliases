@@ -1,0 +1,5 @@
+# Alias to use lsd instead of ls
+alias ls="lsd -X --group-dirs=first"
+alias l="lsd --total-size -X --group-dirs=first"
+
+alias cat=batcat
