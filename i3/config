@@ -7,7 +7,7 @@ set $scripts ~/.config/i3/scripts/
 # Setting powersaving
 exec_always --no-startup-id "$scripts/power_mode_startup.sh"
 
-exec_always --no-startup-id "/opt/bin/deadd-notification-center"
+exec_always --no-startup-id dunst
 
 # Setting langugage layouts
 exec_always "setxkbmap -layout us,ua"
@@ -58,6 +58,9 @@ bindsym Control+Mod1+L exec $screen_locker
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+
+# Start rofi
+bindsym $mod+d exec "rofi -no-config -no-lazy-grab -show drun -modi drun -theme ~/.config/polybar/scripts/rofi/launcher.rasi"
 #============================================================================
 
 # WM Bindings
@@ -183,10 +186,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Dark theme
+# Reading theme from base X configs
 # class                 border  bground text    indicator child_border
-client.focused          #2F343F #2F343F #F8F8F2 #6272A4   #2F343F
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #44475A #44475A #BFBFBF #282A36   #2E343D
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+set_from_resource $fg i3wm.color7 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $bg     $fg  $bg       $bg
+client.focused_inactive $bg     $bg     $fg  $bg       $bg
+client.unfocused        $bg     $bg     $fg  $bg       $bg
+client.urgent           $bg     $bg     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+
+client.background       $bg
