@@ -137,33 +137,35 @@ font:
 #draw_bold_text_with_bright_colors: false
 
 # Colors (Ayu Dark)
-colors:
+#colors:
   # Default colors
-  primary:
-    background: '0x0A0E14'
-    foreground: '0xB3B1AD'
+  #primary:
+    #background: '0x0A0E14'
+    #foreground: '0xB3B1AD'
 
   # Normal colors
-  normal:
-    black:   '0x01060E'
-    red:     '0xEA6C73'
-    green:   '0x91B362'
-    yellow:  '0xF9AF4F'
-    blue:    '0x53BDFA'
-    magenta: '0xFAE994'
-    cyan:    '0x90E1C6'
-    white:   '0xC7C7C7'
+  #normal:
+    #black:   '0x01060E'
+    #red:     '0xEA6C73'
+    #green:   '0x91B362'
+    #yellow:  '0xF9AF4F'
+    #blue:    '0x53BDFA'
+    #magenta: '0xFAE994'
+    #cyan:    '0x90E1C6'
+    #white:   '0xC7C7C7'
 
   # Bright colors
-  bright:
-    black:   '0x686868'
-    red:     '0xF07178'
-    green:   '0xC2D94C'
-    yellow:  '0xFFB454'
-    blue:    '0x59C2FF'
-    magenta: '0xFFEE99'
-    cyan:    '0x95E6CB'
-    white:   '0xFFFFFF'
+  #bright:
+    #black:   '0x686868'
+    #red:     '0xF07178'
+    #green:   '0xC2D94C'
+    #yellow:  '0xFFB454'
+    #blue:    '0x59C2FF'
+    #magenta: '0xFFEE99'
+    #cyan:    '0x95E6CB'
+    #white:   '0xFFFFFF'
+
+# End of my colors
 
 # Bell
 #
@@ -210,7 +212,7 @@ colors:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.6
+background_opacity: 0.9
 
 #selection:
   # This string contains all characters that are used as separators for
@@ -501,6 +503,8 @@ key_bindings:
   - { key: J, mods: Control, chars: "\x02\x1b\x5b\x42" } # Pane Down
   - { key: H, mods: Control, chars: "\x02\x1b\x5b\x44" } # Pane Left
   - { key: L, mods: Control, chars: "\x02\x1b\x5b\x43" } # Pane Right
+  # Removing not needed actions because they are used in tmux
+  - { key: F, mods: Control|Shift, action: None }
 
 #debug:
   # Display the time it takes to redraw each frame.
@@ -523,3 +527,30 @@ key_bindings:
   # Print all received window events.
   #print_events: false
  
+# BEGIN ACE
+colors:
+  primary:
+    background: '#04060B'
+    foreground: '#e0828a'
+  cursor:
+    text:       '#04060B'
+    cursor:     '#e0828a'
+  normal:
+    black:      '#04060B'
+    red:        '#282A47'
+    green:      '#163A63'
+    yellow:     '#243A63'
+    blue:       '#532E48'
+    magenta:    '#18426F'
+    cyan:       '#9E0B12'
+    white:      '#e0828a'
+  bright:
+    black:      '#9c5b60'
+    red:        '#282A47'
+    green:      '#163A63'
+    yellow:     '#243A63'
+    blue:       '#532E48'
+    magenta:    '#18426F'
+    cyan:       '#9E0B12'
+    white:      '#e0828a'
+# END ACE
