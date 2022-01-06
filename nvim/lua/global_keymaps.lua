@@ -1,9 +1,16 @@
--- Save and close tabe
-vim.api.nvim_set_keymap('n', '<C-S>', ':update<CR>', {})
-vim.api.nvim_set_keymap('n', '<C-W>', ':bd<CR>', {})
+-- Save and close tab
+map('n', '<C-S>', ':update<CR>', {})
 
--- Swap lines on Contol-k/j
+-- Swap lines on Contol-Shift-k/j
 require('lineswaper')
 vim.g.BASH_Ctrl_j = 'off'
-vim.api.nvim_set_keymap('n', '<C-k>', ':lua swap_up()<CR>', {})
-vim.api.nvim_set_keymap('n', '<C-j>', ':lua swap_down()<CR>', {})
+map('n', '<C-k>', ':lua swap_up()<CR>', {})
+map('n', '<C-j>', ':lua swap_down()<CR>', {})
+
+-- Moving between tabs
+map("n", "<TAB>", ":bnext<CR>")
+map("n", "<S-TAB>", ":bprevious<CR>")
+
+-- Tab splitting
+map("n", "<C-M-h>", ":split<CR>")
+map("n", "<C-M-v>", ":vsplit<CR>")

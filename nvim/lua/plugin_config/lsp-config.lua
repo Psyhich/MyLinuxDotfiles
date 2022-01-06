@@ -1,26 +1,20 @@
 local inspect = require("plugin_config/inspect")
--- LSP
 
+-- Installer
 local lsp_installer = require("nvim-lsp-installer")
 
-function common_on_attach(client, bufnr)
-	-- ... set up buffer keymaps, etc.
-end
-require("plugin_config/lsp_configurations/csharp")
-
+-- LspConfig
 lsp_installer.on_server_ready(function(server)
-	local opts = {
-		on_attach = common_on_attach,
-	}
 
-	-- (optional) Customize the options passed to the server
-	-- if server.name == "tsserver" then
-	--     opts.root_dir = function() ... end
-	-- end
-
-	server:setup(opts)
+	server:setup({})
 	vim.cmd [[ do User LspAttachBuffers ]]
+
+	-- Starting COQ
+	server:setup(coq.lsp_ensure_capabilities())
 	vim.cmd [[ COQnow -s ]]
 end)
 
 
+--lsp_config["sumneko_lua"].setup({
+	--cmd={"sumneko_lua"}
+--})
