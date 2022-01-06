@@ -6,7 +6,7 @@ RFILE="$HOME/.config/polybar/scripts/rofi/colors.rasi"
 
 # Get colors
 pywal_get() {
-	wal -i "$1" -q -t
+	wal -q -i "$1" 
 }
 
 # Change colors
@@ -53,7 +53,7 @@ get_fg_color(){
 }
 
 # Main
-if [[ -f "/usr/bin/wal" ]]; then
+if [[ -f `command -v wal` ]]; then
 	if [[ "$1" ]]; then
 		pywal_get "$1"
 
