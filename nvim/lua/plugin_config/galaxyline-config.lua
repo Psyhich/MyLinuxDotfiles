@@ -1,2 +1,2 @@
 -- Galaxyline
-require('plugin_config/spaceline')
+require('plugin_config/evilline')
