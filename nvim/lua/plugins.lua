@@ -42,10 +42,11 @@ plug "EdenEast/nightfox.nvim"
 
 -- Utils
 plug "rsaraf/vim-advanced-lint" -- C++ linter
-plug "nvim-telescope/telescope.nvim" -- Fuzy finder
+if vim.version()["minor"] >= 6 then
+	plug "nvim-telescope/telescope.nvim" -- Fuzy finder
+end
 plug "lyokha/vim-xkbswitch" -- Switcher of languages between insert and command mode
 plug "rhysd/vim-grammarous" -- Gramma check
-
 -- Tags
 plug "preservim/tagbar" -- Bar with all tags
 
@@ -66,4 +67,6 @@ require("plugin_config/nerd_commenter-config")
 require("plugin_config/debuger-config")
 require("plugin_config/xkb_switch-config")
 
-require("plugin_config/telescope-config")
+if vim.version()["minor"] >= 6 then
+	require("plugin_config/telescope-config")
+end
