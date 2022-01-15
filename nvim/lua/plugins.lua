@@ -65,7 +65,6 @@ require("plugin_config/ale-config")
 require("plugin_config/coq-config")
 require("plugin_config/nerd_commenter-config")
 
-require("plugin_config/debuger-config")
 require("plugin_config/xkb_switch-config")
 require("plugin_config/autopairs-config")
 
