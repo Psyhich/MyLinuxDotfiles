@@ -30,6 +30,7 @@ plug "dense-analysis/ale" -- Additional checker
 plug "ms-jpq/coq_nvim" -- COQ completer
 plug "ms-jpq/coq.artifacts" -- COQ snippets plugin
 plug "scrooloose/nerdcommenter" -- Coments
+plug "windwp/nvim-autopairs" -- Scopes completer
 
 -- Highlight
 plug "nvim-treesitter/nvim-treesitter" -- Highliting
@@ -51,7 +52,7 @@ plug "rhysd/vim-grammarous" -- Gramma check
 plug "preservim/tagbar" -- Bar with all tags
 
 -- Debugging
-plug "mfussenegger/nvim-dap"
+plug {"sakhnik/nvim-gdb" , run = "./install"}
 
 -- After all plugins installed calling plugin configs
 require("plugin_config/galaxyline-config")
@@ -66,6 +67,7 @@ require("plugin_config/nerd_commenter-config")
 
 require("plugin_config/debuger-config")
 require("plugin_config/xkb_switch-config")
+require("plugin_config/autopairs-config")
 
 if vim.version()["minor"] >= 6 then
 	require("plugin_config/telescope-config")
