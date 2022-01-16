@@ -1,0 +1,8 @@
+directory: ~/Music
+library: ~/.config/beets/musiclibrary.db
+
+import:
+   move: yes
+   copy: no
+   write: no
+plugins: lastgenre

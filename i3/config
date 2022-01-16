@@ -12,7 +12,9 @@ exec_always --no-startup-id dunst
 
 # Setting langugage layouts
 exec_always --no-startup-id "setxkbmap us,ua -option 'grp:alt_shift_toggle' -model pc102"
-exec_always --no-startup-id "xkb-switch --i3"
+exec --no-startup-id "xkb-switch --i3 &"
+# Enabling numlock
+exec --no-startup-id "numlockx on"
 
 # Panel
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
@@ -22,6 +24,8 @@ font pango:3270Nerd Font Mono 12
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 exec --no-startup-id "xss-lock -- $screen_locker"
+# Enabling auto lock after 15 minutes
+exec --no-startup-id "xautolock -time 15 -locker '$screen_locker' &"
 
 #============================================================================
 # BINDINGS
