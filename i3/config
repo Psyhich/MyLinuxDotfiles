@@ -1,17 +1,18 @@
 # Mod1 = alt
 # Mod4 = win
 set $mod Mod4
-set $screen_locker "convert ~/Pictures/Wallpapers/current_screen_locker -resize 1920x1080! RGB:- | i3lock --raw=1920x1080:rgb --image /dev/stdin -e --nofork & xkb-switch -s us"
+set $screen_locker convert ~/Pictures/Wallpapers/current_screen_locker -resize 1920x1080! RGB:- | i3lock --raw=1920x1080:rgb --image /dev/stdin -e --nofork & xkb-switch -s us
 set $scripts ~/.config/i3/scripts/
 
 # Setting powersaving
 exec_always --no-startup-id "$scripts/power_mode_startup.sh"
 
+# Notifications
 exec_always --no-startup-id dunst
 
 # Setting langugage layouts
 exec_always --no-startup-id "setxkbmap us,ua -option 'grp:alt_shift_toggle' -model pc102"
-exec_always "xkb-switch --i3"
+exec_always --no-startup-id "xkb-switch --i3"
 
 # Panel
 exec_always --no-startup-id "~/.config/polybar/launch.sh"
@@ -20,12 +21,13 @@ exec_always --no-startup-id "~/.config/polybar/launch.sh"
 font pango:3270Nerd Font Mono 12
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $screen_locker
+exec --no-startup-id "xss-lock -- $screen_locker"
 
 #============================================================================
 # BINDINGS
 # Terminal
 bindsym $mod+Return exec alacritty
+
 # Print screen
 bindsym Print exec screengrab
 
