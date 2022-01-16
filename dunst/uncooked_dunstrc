@@ -17,7 +17,7 @@
     follow = none
 
     ### Geometry ###
-    geometry = "400x350-5-30"
+    geometry = "400x350-10-30"
 	notification_height = 80
 
     # Scale factor. It is auto-detected if value is 0.
