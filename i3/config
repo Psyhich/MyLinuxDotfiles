@@ -3,21 +3,25 @@
 set $mod Mod4
 set $screen_locker convert ~/Pictures/Wallpapers/current_screen_locker -resize 1920x1080! RGB:- | i3lock --raw=1920x1080:rgb --image /dev/stdin -e --nofork & xkb-switch -s us
 set $scripts ~/.config/i3/scripts/
+set $dunst_folder ~/.config/dunst/
+
+# Setting wallpapers and colorscheme
+exec_always --no-startup-id "~/.config/wallpapers/apply_wallpaper.sh"
 
 # Setting powersaving
 exec_always --no-startup-id "$scripts/power_mode_startup.sh"
 
+# Panel
+exec_always --no-startup-id "~/.config/polybar/launch.sh"
+
 # Notifications
-exec_always --no-startup-id dunst
+exec_always --no-startup-id "killall -q dunst ; dunst &"
 
 # Setting langugage layouts
 exec_always --no-startup-id "setxkbmap us,ua -option 'grp:alt_shift_toggle' -model pc102"
 exec --no-startup-id "xkb-switch --i3 &"
 # Enabling numlock
 exec --no-startup-id "numlockx on"
-
-# Panel
-exec_always --no-startup-id "~/.config/polybar/launch.sh"
 
 # Fonts)
 font pango:3270Nerd Font Mono 12

@@ -35,6 +35,7 @@ plug "windwp/nvim-autopairs" -- Scopes completer
 -- Highlight
 plug "nvim-treesitter/nvim-treesitter" -- Highliting
 plug "xolox/vim-easytags" -- Tag generation and syntax highlight
+plug "norcalli/nvim-colorizer.lua" -- Color highlight
 
 -- Coloschemes
 plug "morhetz/gruvbox"
