@@ -8,6 +8,9 @@ function map(mode, lhs, rhs, opts)
   vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-require('global_configs')
+require("global_configs")
 require("global_keymaps")
 require("plugins")
+
+-- requiring local project config
+require("local_project_configurator")
