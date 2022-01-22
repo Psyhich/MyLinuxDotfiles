@@ -17,7 +17,7 @@
     follow = none
 
     ### Geometry ###
-    geometry = "400x350-10-30"
+    geometry = "400x350-12-30"
 	notification_height = 80
 
     # Scale factor. It is auto-detected if value is 0.
@@ -74,7 +74,6 @@
     frame_width = 0
 
     # Defines color of the frame around the notification window.
-    frame_color = "#aaaaaa"
 
     # Define a color for the separator.
     # possible values are:
@@ -92,7 +91,7 @@
     # Set to 0 to disable.
     # A client can set the 'transient' hint to bypass this. See the rules
     # section for how to disable this if necessary
-    # idle_threshold = 120
+    idle_threshold = 50
 
     ### Text ###
 
