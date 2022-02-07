@@ -25,6 +25,7 @@ plug "neovim/nvim-lspconfig"
 plug "williamboman/nvim-lsp-installer" -- servers installer
 plug "glepnir/lspsaga.nvim" -- LSP UI
 plug "dense-analysis/ale" -- Additional checker
+plug { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- Support for Jupyter notebook
 
 -- Completion
 plug "ms-jpq/coq_nvim" -- COQ completer
@@ -62,6 +63,7 @@ require("plugin_config/bufferline-config")
 require("plugin_config/lsp-config")
 require("plugin_config/highlighting-config")
 require("plugin_config/ale-config")
+require("plugin_config/magma-nvim")
 
 require("plugin_config/coq-config")
 require("plugin_config/nerd_commenter-config")

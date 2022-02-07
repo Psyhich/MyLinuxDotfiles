@@ -6,8 +6,7 @@ RFILE="$HOME/.config/rofi/colors.rasi"
 
 # Get colors
 pywal_get() {
-	wal -c ;
-	wal -q -i "$1" 
+	wal --backend colorz -i "$1" 
 }
 
 # Change colors

@@ -212,7 +212,7 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 0.9
+background_opacity: 0.90
 
 #selection:
   # This string contains all characters that are used as separators for
@@ -530,27 +530,27 @@ key_bindings:
 # BEGIN ACE
 colors:
   primary:
-    background: '#0B0603'
-    foreground: '#efda9b'
+    background: '#20231d'
+    foreground: '#c7c8c6'
   cursor:
-    text:       '#0B0603'
-    cursor:     '#efda9b'
+    text:       '#20231d'
+    cursor:     '#c7c8c6'
   normal:
-    black:      '#0B0603'
-    red:        '#676954'
-    green:      '#933514'
-    yellow:     '#9D5627'
-    blue:       '#C44D22'
-    magenta:    '#E36420'
-    cyan:       '#FB9B2E'
-    white:      '#efda9b'
+    black:      '#20231d'
+    red:        '#a3b095'
+    green:      '#5bac59'
+    yellow:     '#59a896'
+    blue:       '#8095a9'
+    magenta:    '#5c78aa'
+    cyan:       '#435daa'
+    white:      '#c7c8c6'
   bright:
-    black:      '#a7986c'
-    red:        '#676954'
-    green:      '#933514'
-    yellow:     '#9D5627'
-    blue:       '#C44D22'
-    magenta:    '#E36420'
-    cyan:       '#FB9B2E'
-    white:      '#efda9b'
+    black:      '#575a55'
+    red:        '#a3b095'
+    green:      '#5bac59'
+    yellow:     '#59a896'
+    blue:       '#8095a9'
+    magenta:    '#5c78aa'
+    cyan:       '#435daa'
+    white:      '#c7c8c6'
 # END ACE

@@ -4,3 +4,6 @@
 [submodule "bash/oh-my-bash"]
 	path = bash/oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash
+[submodule "ranger/plugins/ranger_devicons"]
+	path = ranger/plugins/ranger_devicons
+	url = https://github.com/alexanderjeurissen/ranger_devicons
