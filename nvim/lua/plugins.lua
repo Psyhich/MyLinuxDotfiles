@@ -30,7 +30,7 @@ plug { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- Support for Jup
 -- Completion
 plug "ms-jpq/coq_nvim" -- COQ completer
 plug "ms-jpq/coq.artifacts" -- COQ snippets plugin
-plug "scrooloose/nerdcommenter" -- Coments
+plug "numToStr/Comment.nvim" -- Coments
 plug "windwp/nvim-autopairs" -- Scopes completer
 
 -- Highlight
@@ -66,7 +66,7 @@ require("plugin_config/ale-config")
 require("plugin_config/magma-nvim")
 
 require("plugin_config/coq-config")
-require("plugin_config/nerd_commenter-config")
+require("plugin_config/commenter-config")
 
 require("plugin_config/xkb_switch-config")
 require("plugin_config/autopairs-config")
