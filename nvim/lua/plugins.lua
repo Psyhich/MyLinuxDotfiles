@@ -23,7 +23,7 @@ plug "onsails/lspkind-nvim" -- Icons for completion
 -- LSP and code analysis
 plug "neovim/nvim-lspconfig"
 plug "williamboman/nvim-lsp-installer" -- servers installer
-plug "glepnir/lspsaga.nvim" -- LSP UI
+plug "tami5/lspsaga.nvim" -- LSP UI
 plug "dense-analysis/ale" -- Additional checker
 plug { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- Support for Jupyter notebook
 
@@ -32,6 +32,7 @@ plug "ms-jpq/coq_nvim" -- COQ completer
 plug "ms-jpq/coq.artifacts" -- COQ snippets plugin
 plug "numToStr/Comment.nvim" -- Coments
 plug "windwp/nvim-autopairs" -- Scopes completer
+plug "ojroques/nvim-lspfuzzy" -- Fuzzy search for LSP
 
 -- Highlight
 plug "nvim-treesitter/nvim-treesitter" -- Highliting
@@ -50,6 +51,9 @@ if vim.version()["minor"] >= 6 then
 end
 plug "lyokha/vim-xkbswitch" -- Switcher of languages between insert and command mode
 plug "rhysd/vim-grammarous" -- Gramma check
+plug "junegunn/fzf"
+plug "junegunn/fzf.vim"  -- to enable preview (optional)
+
 -- Tags
 plug "preservim/tagbar" -- Bar with all tags
 
@@ -74,3 +78,4 @@ require("plugin_config/autopairs-config")
 if vim.version()["minor"] >= 6 then
 	require("plugin_config/telescope-config")
 end
+require('lspfuzzy').setup {}
