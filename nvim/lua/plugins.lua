@@ -12,7 +12,7 @@ plug "sharkdp/fd"
 -- Addons
 -- Galaxyline line in top with all tabs
 plug "akinsho/bufferline.nvim"
-plug "glepnir/galaxyline.nvim" -- Status line in the bottom
+plug "NTBBloodbath/galaxyline.nvim" -- Status line in the bottom
 plug "kyazdani42/nvim-tree.lua" -- FileTree
 
 -- Icons
