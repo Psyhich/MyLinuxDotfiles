@@ -10,8 +10,8 @@ vim.opt.shiftwidth = 4
 
 -- Appeareance
 vim.opt.termguicolors = true
-vim.cmd(":colorscheme nightfox")
-vim.cmd(":hi Normal guibg=NONE")
+vim.cmd(":colorscheme ayu")
+-- vim.cmd(":hi Normal guibg=NONE")
 
 -- Tab appeareance
 vim.cmd(":set list lcs=tab:\\ \\ ·")

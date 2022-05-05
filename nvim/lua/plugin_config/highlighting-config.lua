@@ -22,17 +22,28 @@ require("nvim-treesitter.configs").setup {
 		"lua",
 		"vim",
 	},
-	highlight = {
+	highlight =
+	{
 		enable = true
 	},
-	indent = {
-		enable = true
+	indent =
+	{
+		enable = false
 	}
 }
 
--- Tags support
-vim.g.easytags_cmd = "ctags-universal"
-vim.g.easytags_dynamic_files = 1
-vim.g.easytags_opts = {
-	"--languages=all"
+require("nvim-treesitter.configs").setup {
+  rainbow =
+	{
+	colors =
+		{
+			"#C64D5C",
+			"#2E67C0",
+			"#F09241",
+			"#285577"
+		},
+    enable = true,
+    extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+    max_file_lines = nil, -- Do not enable for files with more than n lines, int
+  }
 }

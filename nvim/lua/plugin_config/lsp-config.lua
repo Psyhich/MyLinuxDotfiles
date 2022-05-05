@@ -1,5 +1,8 @@
 -- Installer
-local lsp_installer = require("nvim-lsp-installer")
+-- Lsp fuzzy finder
+require('lspfuzzy').setup {}
+
+require("nvim-lsp-installer").setup{}
 
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -9,47 +12,63 @@ function RunCOQ()
 end
 
 -- LspConfig
-lsp_installer.on_server_ready(function(server)
-	local opts = {
-		capabilities = capabilities,
-		on_attach = RunCOQ
-	}
-
-	if server.name == "sumneko_lua" then
-		local runtime_path = vim.split(package.path, ';')
-		table.insert(runtime_path, 'lua/?.lua')
-		table.insert(runtime_path, 'lua/?/init.lua')
-
-		opts.settings = {
-			Lua = {
-				runtime = {
+local lua_runtime_path = vim.split(package.path, ';')
+table.insert(lua_runtime_path, 'lua/?.lua')
+table.insert(lua_runtime_path, 'lua/?/init.lua')
+lspconfig.sumneko_lua.setup
+{
+	opts =
+	{
+		settings =
+		{
+		Lua =
+			{
+				runtime =
+				{
 					-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
 					version = 'LuaJIT',
 					-- Setup your lua path
-					path = runtime_path,
+					path = lua_runtime_path,
 				},
-				diagnostics = {
+				diagnostics =
+				{
 					-- Get the language server to recognize the `vim` global
-					globals = { 'vim' },
+					globals = { 'vim', 'nvim' },
 				},
-				workspace = {
+				workspace =
+				{
 					-- Make the server aware of Neovim runtime files
 					library = vim.api.nvim_get_runtime_file('', true),
 				},
 				-- Do not send telemetry data containing a randomized but unique identifier
-				telemetry = {
+				telemetry =
+				{
 					enable = false,
 				},
 			}
 		}
-
-	 end
-
-	server:setup(opts)
-end)
+	}
+}
+lspconfig.bashls.setup{}
+lspconfig.clangd.setup{}
+lspconfig.cmake.setup{}
+lspconfig.hls.setup{}
+lspconfig.ltex.setup{}
+lspconfig.omnisharp.setup{}
+lspconfig.pylsp.setup{}
+lspconfig.rust_analyzer.setup{}
+lspconfig.sumneko_lua.setup{}
+lspconfig.yamlls.setup{}
 
 -- Setting signs for
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs =
+{
+	Error = " ",
+	Warn = " ",
+	Hint = " ",
+	Info = " "
+}
+
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })

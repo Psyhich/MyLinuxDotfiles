@@ -18,8 +18,7 @@ exec_always --no-startup-id "~/.config/polybar/launch.sh"
 exec_always --no-startup-id "killall -q dunst ; dunst &"
 
 # Setting langugage layouts
-exec_always --no-startup-id "setxkbmap us,ua -option 'grp:alt_shift_toggle' -model pc102"
-exec --no-startup-id "xkb-switch --i3 &"
+exec_always --no-startup-id "setxkbmap us,ua -option 'grp:alt_shift_toggle' -model pc105"
 # Enabling numlock
 exec --no-startup-id "numlockx on"
 
