@@ -7,10 +7,6 @@ require("nvim-lsp-installer").setup{}
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-function RunCOQ()
-	vim.cmd(":COQnow -s")
-end
-
 -- LspConfig
 local lua_runtime_path = vim.split(package.path, ';')
 table.insert(lua_runtime_path, 'lua/?.lua')
@@ -59,6 +55,9 @@ lspconfig.pylsp.setup{}
 lspconfig.rust_analyzer.setup{}
 lspconfig.sumneko_lua.setup{}
 lspconfig.yamlls.setup{}
+lspconfig.html.setup{}
+lspconfig.emmet_ls.setup{}
+lspconfig.tailwindcss.setup{}
 
 -- Setting signs for
 local signs =
@@ -81,4 +80,5 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Jump to implement
 map("n", "<leader>rn", "<cmd>lua require('lspsaga.rename').rename()<CR>") -- Rename
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>") -- Find references
 map("n", "<leader>ac", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>") -- Code action
+map("n", "<leader>sg", "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- Function signature
 

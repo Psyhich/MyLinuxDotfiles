@@ -1,3 +1,5 @@
+
+vim.g.mapleader = " "
 -- Save and close tab
 map('n', '<C-S>', ':update<CR>', {})
 

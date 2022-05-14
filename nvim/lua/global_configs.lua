@@ -1,3 +1,11 @@
+local util = require("lspconfig/util")
+BUILD_FOLDER = (util.root_pattern("build"))(vim.fn.expand('%:p'))
+if BUILD_FOLDER then
+	BUILD_FOLDER = BUILD_FOLDER .. "/build/"
+else
+	BUILD_FOLDER = "./"
+end
+
 -- Basic configs
 vim.opt.relativenumber = true
 vim.opt.number = true

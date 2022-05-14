@@ -10,6 +10,7 @@ plug "xolox/vim-misc"
 plug "sharkdp/fd"
 plug "roxma/nvim-yarp"
 plug "roxma/vim-hug-neovim-rpc"
+plug "neomake/neomake"
 
 -- Addons
 -- Galaxyline line in top with all tabs

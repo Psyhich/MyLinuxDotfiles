@@ -21,6 +21,9 @@ require("nvim-treesitter.configs").setup {
 		"javascript",
 		"lua",
 		"vim",
+
+		--
+		"html"
 	},
 	highlight =
 	{
@@ -31,6 +34,9 @@ require("nvim-treesitter.configs").setup {
 		enable = false
 	}
 }
+
+local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
+parser_config.html.filetype = {"html", "csp"}
 
 require("nvim-treesitter.configs").setup {
   rainbow =
