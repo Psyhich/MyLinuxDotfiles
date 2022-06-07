@@ -93,5 +93,7 @@ export PROMPT_DIRTRIM=2
 export VISUAL="nvim"
 export EDITOR="nvim"
 
+export PATH="$PATH:~/.cargo/bin/:~/.local/bin"
+
 # Compilation flags
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'

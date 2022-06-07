@@ -40,3 +40,6 @@ vim.g.ale_c_clangformat_options = "-style=file:" .. vim.fn.stdpath('config') .. 
 -- vim.g.ale_cpp_clangtidy_executable = "clang-tidy"
 vim.g.ale_c_parse_compile_commands = 1
 vim.g.ale_linters_explicit = 1
+
+-- Setting keymap for formating
+map("n", "<leader>ff", ":ALEFix clang-format<CR>")

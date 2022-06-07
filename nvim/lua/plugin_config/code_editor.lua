@@ -7,6 +7,8 @@ require("nvim-autopairs").setup
 	fast_wrap = {},
 }
 
+require("plugin_config/build_system-config")
+
 -- Configuring gtest
 vim.g["gtest#highlight_failing_tests"] = 1
 -- Setting default tests executable

@@ -45,6 +45,7 @@ lspconfig.sumneko_lua.setup
 		}
 	}
 }
+lspconfig.gdscript.setup{ flags = { debounce_text_changes = 150 } }
 lspconfig.bashls.setup{}
 lspconfig.clangd.setup{}
 lspconfig.cmake.setup{}
@@ -80,5 +81,5 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>") -- Jump to implement
 map("n", "<leader>rn", "<cmd>lua require('lspsaga.rename').rename()<CR>") -- Rename
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>") -- Find references
 map("n", "<leader>ac", "<cmd>lua require('lspsaga.codeaction').code_action()<CR>") -- Code action
-map("n", "<leader>sg", "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- Function signature
+map("n", "<leader>sh", "<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>") -- Function signature
 

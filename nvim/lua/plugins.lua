@@ -12,14 +12,12 @@ plug "roxma/nvim-yarp"
 plug "roxma/vim-hug-neovim-rpc"
 plug "neomake/neomake"
 
--- Addons
--- Galaxyline line in top with all tabs
+-- Editor appereance
 plug "akinsho/bufferline.nvim"
 plug "NTBBloodbath/galaxyline.nvim" -- Status line in the bottom
 plug "kyazdani42/nvim-tree.lua" -- FileTree
 plug "ms-jpq/chadtree" -- File tree buffer
 plug "preservim/tagbar" -- Bar with all tags
-
 -- Icons
 plug "kyazdani42/nvim-web-devicons"
 plug "ryanoasis/vim-devicons"
@@ -32,6 +30,7 @@ plug "tami5/lspsaga.nvim" -- LSP UI
 plug "dense-analysis/ale" -- Additional checker
 plug { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- Support for Jupyter notebook
 plug "ojroques/nvim-lspfuzzy" -- Fuzzy search for LSP
+plug "habamax/vim-godot"
 
 plug "rhysd/vim-grammarous" -- Gramma check
 
@@ -47,12 +46,19 @@ plug "xolox/vim-easytags" -- Tag generation and syntax highlight
 plug "norcalli/nvim-colorizer.lua" -- Color highlight
 plug "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
+-- Test features
+plug "alepez/vim-gtest"
+-- TODO: Should work on it to add code-coverage
+-- plug "google/vim-maktaba"
+-- plug "google/vim-coverage"
+-- plug "google/vim-glaive"
+
+-- IDE features
+plug {"pianocomposer321/yabs.nvim", branch="rewrite"} -- Build configuration creator and runner
+
 -- Coloschemes
 plug "Shatur/neovim-ayu"
 plug "EdenEast/nightfox.nvim"
-
--- Test support
-plug "alepez/vim-gtest"
 
 -- Git support
 plug "tpope/vim-fugitive"

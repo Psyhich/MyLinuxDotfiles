@@ -5,6 +5,10 @@ set $screen_locker convert ~/Pictures/Wallpapers/current_screen_locker -resize 1
 set $scripts ~/.config/i3/scripts/
 set $dunst_folder ~/.config/dunst/
 
+# Sounds
+#exec --no-startup-id pipewire
+#exec --no-startup-id pipewire-pulse
+
 # Setting wallpapers and colorscheme
 exec_always --no-startup-id "~/.config/wallpapers/apply_wallpaper.sh"
 
@@ -19,11 +23,12 @@ exec_always --no-startup-id "killall -q dunst ; dunst &"
 
 # Setting langugage layouts
 exec_always --no-startup-id "setxkbmap us,ua -option 'grp:alt_shift_toggle' -model pc105"
+exec_always "python3 ~/.local/bin/i3-xkb-switcher"
 # Enabling numlock
 exec --no-startup-id "numlockx on"
 
 # Fonts)
-font pango:3270Nerd Font Mono 12
+font pango:3270Nerd Font Mono 14
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 exec --no-startup-id "xss-lock -- $screen_locker"
@@ -36,7 +41,7 @@ exec --no-startup-id "xautolock -time 15 -locker '$screen_locker' &"
 bindsym $mod+Return exec alacritty
 
 # Print screen
-bindsym Print exec screengrab
+bindsym Print exec "ksnip -r"
 
 # Sound
 #increase sound volume
