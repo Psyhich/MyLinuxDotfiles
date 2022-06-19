@@ -46,15 +46,12 @@ plug "xolox/vim-easytags" -- Tag generation and syntax highlight
 plug "norcalli/nvim-colorizer.lua" -- Color highlight
 plug "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
--- Test features
-plug "alepez/vim-gtest"
--- TODO: Should work on it to add code-coverage
--- plug "google/vim-maktaba"
--- plug "google/vim-coverage"
--- plug "google/vim-glaive"
-
 -- IDE features
-plug {"pianocomposer321/yabs.nvim", branch="rewrite"} -- Build configuration creator and runner
+plug "ilyachur/cmake4vim"
+plug "SantinoKeupp/lualine-cmake4vim.nvim"
+plug "SantinoKeupp/telescope-cmake4vim.nvim"
+plug "mfussenegger/nvim-dap"
+plug "vim-test/vim-test"
 
 -- Coloschemes
 plug "Shatur/neovim-ayu"

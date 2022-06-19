@@ -18,10 +18,11 @@ end
 -- Getting project dir
 local util = require("lspconfig/util")
 
-local project_config_dir = ".neovim_config"
+local project_config_dir = ".local_config"
 
 local found_project_root = (util.root_pattern(project_config_dir))(vim.fn.expand('%:p'))
 
 if found_project_root then
 	dofile(found_project_root .. "/" .. project_config_dir .. "/" .."init.lua")
+	print("Found project dir, executed file")
 end
