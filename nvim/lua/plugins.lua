@@ -1,95 +1,95 @@
--- Set the short hand
-local plug = require("paq").paq
+vim.cmd [[packadd packer.nvim]]
 
--- Make paq manage itself
-plug { "savq/paq-nvim", opt = true }
+return require('packer').startup(function(use)
+	-- Make paq manage itself
+		use 'wbthomason/packer.nvim'
 
--- Libs
-plug "nvim-lua/plenary.nvim"
-plug "xolox/vim-misc"
-plug "sharkdp/fd"
-plug "roxma/nvim-yarp"
-plug "roxma/vim-hug-neovim-rpc"
-plug "neomake/neomake"
+	-- Libs
+		use "xolox/vim-misc"
+		use "sharkdp/fd"
+		use "roxma/nvim-yarp"
+		use "roxma/vim-hug-neovim-rpc"
+		use "neomake/neomake"
+		use "BurntSushi/ripgrep"
 
--- Editor appereance
-plug "akinsho/bufferline.nvim"
-plug "NTBBloodbath/galaxyline.nvim" -- Status line in the bottom
-plug "kyazdani42/nvim-tree.lua" -- FileTree
-plug "ms-jpq/chadtree" -- File tree buffer
-plug "preservim/tagbar" -- Bar with all tags
--- Icons
-plug "kyazdani42/nvim-web-devicons"
-plug "ryanoasis/vim-devicons"
-plug "onsails/lspkind-nvim" -- Icons for completion
+	-- Search utils
+		use "junegunn/fzf"
+		use "junegunn/fzf.vim"  -- to enable preview (optional)
 
--- LSP and code analysis
-plug "neovim/nvim-lspconfig"
-plug "williamboman/nvim-lsp-installer" -- servers installer
-plug "tami5/lspsaga.nvim" -- LSP UI
-plug "dense-analysis/ale" -- Additional checker
-plug { 'dccsillag/magma-nvim', run = ':UpdateRemotePlugins' } -- Support for Jupyter notebook
-plug "ojroques/nvim-lspfuzzy" -- Fuzzy search for LSP
-plug "habamax/vim-godot"
+	-- Editor appereance
+		use "akinsho/bufferline.nvim"
+		use "NTBBloodbath/galaxyline.nvim" -- Status line in the bottom
+		use "ms-jpq/chadtree" -- File tree buffer
+		use "preservim/tagbar" -- Bar with all tags
+		-- Icons
+			use{
+				"kyazdani42/nvim-web-devicons",
+				config = function ()
+					require'nvim-web-devicons'.setup {}
+				end
+			}
+			use "ryanoasis/vim-devicons"
+			use "onsails/lspkind-nvim" -- Icons for completion
 
-plug "rhysd/vim-grammarous" -- Gramma check
+	-- LSP and code analysis
+		use({'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'})
+	-- lspconfig
+		use 'neovim/nvim-lspconfig'
+		use "tami5/lspsaga.nvim" -- prettier LSP windows
 
--- Completion
-plug "ms-jpq/coq_nvim" -- COQ completer
-plug "ms-jpq/coq.artifacts" -- COQ snippets plugin
-plug "numToStr/Comment.nvim" -- Coments
-plug "windwp/nvim-autopairs" -- Scopes completer
+	-- Completion
+		use 'hrsh7th/nvim-cmp'
+		use 'hrsh7th/cmp-buffer'
+		use 'hrsh7th/cmp-path'
+		use 'uga-rosa/cmp-dictionary'
+		use 'hrsh7th/cmp-nvim-lsp'
+		use 'hrsh7th/cmp-nvim-lua'
 
--- Highlight
-plug "nvim-treesitter/nvim-treesitter" -- Highliting
-plug "xolox/vim-easytags" -- Tag generation and syntax highlight
-plug "norcalli/nvim-colorizer.lua" -- Color highlight
-plug "p00f/nvim-ts-rainbow" -- Rainbow parentheses
+	-- Snippets [TODO]
+		use 'saadparwaiz1/cmp_luasnip'
+		use 'L3MON4D3/LuaSnip'
+		use 'rafamadriz/friendly-snippets'
 
--- IDE features
-plug "ilyachur/cmake4vim"
-plug "SantinoKeupp/lualine-cmake4vim.nvim"
-plug "SantinoKeupp/telescope-cmake4vim.nvim"
-plug "mfussenegger/nvim-dap"
-plug "vim-test/vim-test"
+	-- LSP managers
+		use 'williamboman/mason.nvim'
+		use 'williamboman/mason-lspconfig.nvim'
 
--- Coloschemes
-plug "Shatur/neovim-ayu"
-plug "EdenEast/nightfox.nvim"
+	-- External LSPs
+		use 'ranjithshegde/ccls.nvim'
 
--- Git support
-plug "tpope/vim-fugitive"
+		use "rhysd/vim-grammarous" -- Gramma check
 
--- Utils
+		use "numToStr/Comment.nvim" -- Coments
 
-if vim.version()["minor"] >= 6 then
-	plug "nvim-telescope/telescope.nvim" -- Fuzy finder
-end
+	-- Highlight
+		use "spywhere/detect-language.nvim" -- Language autodetect
+		use "norcalli/nvim-colorizer.lua" -- Color highlight
+		use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
 
--- Keyboard utils
-plug "lyokha/vim-xkbswitch" -- Switcher of languages between insert and command mode
+	-- IDE features [TODO]
+		use { 'mhartington/formatter.nvim' } -- Formatter
+		use {
+			"folke/trouble.nvim", -- Errors list
+			requires = "nvim-tree/nvim-web-devicons",
+			config = function()
+				require("trouble").setup { }
+			end
+		}
+		use "ilyachur/cmake4vim"
+		use "SantinoKeupp/telescope-cmake4vim.nvim"
+		-- use "vim-test/vim-test"
 
--- Search utils
-plug "junegunn/fzf"
-plug "junegunn/fzf.vim"  -- to enable preview (optional)
+	-- Coloschemes
+		use "Shatur/neovim-ayu"
+		use "EdenEast/nightfox.nvim"
+		use "folke/tokyonight.nvim"
+		use "rebelot/kanagawa.nvim"
 
--- Debugging
-plug {"sakhnik/nvim-gdb" , run = "./install"}
-
-
------------------------------------------------------
--- After all plugins installed calling plugin configs
-require("plugin_config/galaxyline-config")
-require("plugin_config/bufferline-config")
-
-require("plugin_config/code_analysis")
-require("plugin_config/highlighting-config")
-require("plugin_config/code_editor")
-
-require("plugin_config/magma-nvim")
-
-require("plugin_config/xkb_switch-config")
-
-if vim.version()["minor"] >= 6 then
-	require("plugin_config/telescope-config")
-end
+	-- Git support
+		use "tpope/vim-fugitive"
+		use
+		{
+			'nvim-telescope/telescope.nvim', tag = '0.1.0',
+			requires = { {'nvim-lua/plenary.nvim'} }
+		}
+end)
