@@ -99,10 +99,15 @@ _G.packer_plugins = {
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/chadtree",
     url = "https://github.com/ms-jpq/chadtree"
   },
-  cmake4vim = {
+  ["clangd_extensions.nvim"] = {
     loaded = true,
-    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/cmake4vim",
-    url = "https://github.com/ilyachur/cmake4vim"
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/clangd_extensions.nvim",
+    url = "https://github.com/p00f/clangd_extensions.nvim"
+  },
+  ["cmake-tools.nvim"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/cmake-tools.nvim",
+    url = "https://github.com/Civitasv/cmake-tools.nvim"
   },
   ["cmp-buffer"] = {
     loaded = true,
@@ -189,10 +194,20 @@ _G.packer_plugins = {
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
+  ["mason-nvim-dap.nvim"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/mason-nvim-dap.nvim",
+    url = "https://github.com/jay-babu/mason-nvim-dap.nvim"
+  },
   ["mason.nvim"] = {
     loaded = true,
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
+  },
+  ["neodev.nvim"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/neodev.nvim",
+    url = "https://github.com/folke/neodev.nvim"
   },
   neomake = {
     loaded = true,
@@ -219,6 +234,21 @@ _G.packer_plugins = {
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-dap-virtual-text"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-dap-virtual-text",
+    url = "https://github.com/theHamsta/nvim-dap-virtual-text"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -228,6 +258,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
   ["nvim-ts-rainbow"] = {
     loaded = true,
@@ -265,10 +300,10 @@ _G.packer_plugins = {
     path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/tagbar",
     url = "https://github.com/preservim/tagbar"
   },
-  ["telescope-cmake4vim.nvim"] = {
+  ["telescope-ui-select.nvim"] = {
     loaded = true,
-    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/telescope-cmake4vim.nvim",
-    url = "https://github.com/SantinoKeupp/telescope-cmake4vim.nvim"
+    path = "/home/psyhich/.local/share/nvim/site/pack/packer/start/telescope-ui-select.nvim",
+    url = "https://github.com/nvim-telescope/telescope-ui-select.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,

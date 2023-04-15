@@ -14,7 +14,7 @@ vim.opt.shiftwidth = 4
 
 -- Appeareance
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("kanagawa")
+vim.cmd.colorscheme("carbonfox")
 -- vim.cmd(":hi Normal guibg=NONE")
 
 -- Tab appeareance
