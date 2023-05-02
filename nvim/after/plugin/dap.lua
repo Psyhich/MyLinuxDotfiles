@@ -82,10 +82,6 @@ dap.adapters.cppdbg =
 	id = 'cppdbg',
 	type = "executable",
 	command = vim.fn.stdpath("data") .. '/mason/bin/OpenDebugAD7',
-	options =
-	{
-		detached = false
-	}
 }
 
 dap.configurations.cpp =
@@ -98,9 +94,9 @@ dap.configurations.cpp =
 			return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
 		end,
 		cwd = '${workspaceFolder}',
-		stopAtEntry = true,
-		runInTerminal = true,
-		console = "integratedTerminal",
+		-- stopAtEntry = true,
+		-- runInTerminal = true,
+		-- console = "integratedTerminal",
 		setupCommands = {
 			{
 				text = '-enable-pretty-printing',

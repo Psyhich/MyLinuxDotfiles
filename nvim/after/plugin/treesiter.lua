@@ -32,7 +32,8 @@ require("nvim-treesitter.configs").setup {
 		enable = false
 	}
 }
-require'treesitter-context'.setup{
+require'treesitter-context'.setup
+{
 	enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
 	max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
 	min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
@@ -46,7 +47,8 @@ require'treesitter-context'.setup{
 	zindex = 20, -- The Z-index of the context window
 }
 
-require("nvim-treesitter.configs").setup {
+require("nvim-treesitter.configs").setup
+{
 	rainbow =
 	{
 		colors =
