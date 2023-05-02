@@ -2,3 +2,4 @@ i3/temps/
 *.db
 *.pickle
 dunstrc
+packer_compiled.lua
