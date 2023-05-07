@@ -46,12 +46,37 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		['<C-Space>'] = cmp.mapping.complete(),
 		['<C-e>'] = cmp.mapping.abort(),
-		['<C-s>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		['<C-s>'] = cmp.mapping.confirm({ select = true }),
+		["<C-n>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			elseif has_words_before() then
+				cmp.complete()
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
+		["<C-p>"] = cmp.mapping(function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end, { "i", "s" }),
 	}),
 	sources = cmp.config.sources(
 		{
-			{ name = 'nvim_lsp' },
-			{ name = 'luasnip' }, -- For luasnip users.
+			{
+				name = 'nvim_lsp',
+				entry_filter = function(entry)
+					return require("cmp").lsp.CompletionItemKind.Snippet ~= entry:get_kind()
+				end
+			},
+			{ name = 'luasnip' },
 		},
 		{
 			{ name = 'buffer' },
@@ -122,6 +147,8 @@ end
 
 -- Set up lspconfig.
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+local clangd_capabilities = cmp_capabilities
+clangd_capabilities.textDocument.completion.snippetSupport = false
 require("mason-lspconfig").setup_handlers {
 	function (server_name) -- default handler
 		require("lspconfig")[server_name].setup
@@ -156,7 +183,7 @@ require("mason-lspconfig").setup_handlers {
 		require("clangd_extensions").setup
 		{
 			server = {
-				capabilities = cmp_capabilities,
+				capabilities = clangd_capabilities,
 				on_attach = cpp_bindings,
 				clangd =
 				{

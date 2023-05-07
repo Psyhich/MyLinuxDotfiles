@@ -2,6 +2,7 @@ vim.g.mapleader = " "
 -- Save and close tab
 vim.keymap.set('n', '<C-S>', ':update<CR>')
 
+vim.keymap.set("i", "jj", "<ESC>")
 -- Swap lines on Contol-Shift-k/j
 -- require('lineswaper')
 vim.g.BASH_Ctrl_j = 'off'

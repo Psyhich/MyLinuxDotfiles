@@ -25,28 +25,82 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 
-vim.keymap.set("i", "<C-i>",
-	function ()
-		local ls = require("luasnip")
-		if ls.expand_or_jumpable() then
-			ls.expand_or_jump()
-		end
-	end, { silent = true, expr = true})
-
--- Snippets are created by:
--- s(trigger:string, nodes:table)
-ls.add_snippets("all", {
+local function reuse(args, _, reuse_arg)
+    return "" .. args[reuse_arg][1]
+end
+ls.add_snippets("cpp",
+{
 	s("ternary", {
-		-- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
 		i(1, "cond"), t(" ? "), i(2, "then"), t(" : "), i(3, "else")
-	})
-})
-ls.add_snippets("all", {
-	s("if", {
+	}),
+	s("if",
+	{
 		t("if ("), i(1, "condition"), t({")",
 			"{",
-				"\t"}), i(2, "statement"),
-		t({"", "}"})
+				"\t"}), i(0, "statement"), t({";",
+			"}"})
+	}),
+	s("for",
+	{
+		t("for ("), i(1), t("; "), i(2), t("; "), i(3), t({")",
+		"{", "\t"}),
+			i(0), t({";",
+		"}"})
+
+	}),
+	s("foreach",
+	{
+		t("for ("), i(1), t(" : "), i(2), t({")",
+		"{", "\t"}),
+			i(0), t({";",
+		"}"})
+
+	}),
+	s("while",
+	{
+		t("while ("), i(1), t({")",
+		"{", "\t"}),
+			i(0), t({";",
+		"}"})
+
+	}),
+	s("dowhile",
+	{
+		t({"do",
+		"{",
+			"\t"}), i(0), t({";",
+		"} while ("}), i(1), t(")")
+	}),
+	s("main",
+	{
+		t({"int main(int argc, char **argv)",
+		"{",
+			"\t"}), i(0), t({";",
+		"}"})
+	}),
+	s("class",
+	{
+		t("class "), i(1), t({"",
+		"{",
+		"public:",
+			"\t"}), f(reuse, {1}, {user_args = {1}}), t({"() = default;",
+			"\t~"}), f(reuse, {1}, {user_args = {1}}), t({"() = default;",
+		"};"})
+	}),
+	s("function",
+	{
+		i(1, "return"), t(" "), i(2, "name"), t("("), i(3, "vars"), t({")",
+		"{",
+			"\t"}), i(0, "body"), t({";",
+		"}"})
+	}),
+	s("#include<>",
+	{
+		t("#include <"), i(0), t(">")
+	}),
+	s("#include\"\"",
+	{
+		t("#include \""), i(0), t("\"")
 	})
 })
 
@@ -67,6 +121,17 @@ ls.add_snippets("cmake", {
 	})
 })
 
+ls.add_snippets("text",
+{
+	s("conanfile",
+	{
+		t({"[requires]",
+		""}), i(1, "requires"), t({"",
+		"[generators]",
+		""}), i(0, "generators")
+	})
+})
+
 ls.add_snippets("tex", {
 	s("figure", {
 		t({
@@ -84,10 +149,7 @@ ls.add_snippets("tex", {
 			"}",
 			"\\end{figure}"
 		}),
-	})
-})
-
-ls.add_snippets("tex", {
+	}),
 	s("emph", {
 		t("\\emph{"), i(1), t("}")
 	})
