@@ -185,15 +185,11 @@ require("mason-lspconfig").setup_handlers {
 			server = {
 				capabilities = clangd_capabilities,
 				on_attach = cpp_bindings,
-				clangd =
+				cmd =
 				{
-					arguments =
-					{
-						"--header-insertion=never",
-						"--background-index",
-						"--completion-style=detailed",
-						"--sync"
-					}
+					"clangd",
+					"--header-insertion=never",
+					"--completion-style=detailed"
 				}
 			},
 			extensions = {

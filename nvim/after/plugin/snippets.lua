@@ -101,7 +101,13 @@ ls.add_snippets("cpp",
 	s("#include\"\"",
 	{
 		t("#include \""), i(0), t("\"")
-	})
+	}),
+	s("#ifndef",
+	{
+		t("#ifndef "), i(1), t({"",
+		"#define "}), f(reuse, {1}, {user_args = {1}}), t({"",
+		"#endif // "}), f(reuse, {1}, {user_args = {1}})
+	}),
 })
 
 ls.add_snippets("cmake", {
