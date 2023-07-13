@@ -40,6 +40,20 @@ ls.add_snippets("cpp",
 				"\t"}), i(0, "statement"), t({";",
 			"}"})
 	}),
+	s("elseif",
+	{
+		t("else if ("), i(1, "condition"), t({")",
+			"{",
+				"\t"}), i(0, "statement"), t({";",
+			"}"})
+	}),
+	s("else",
+	{
+		t({"else",
+			"{",
+				"\t"}), i(1, "statement"), t({";",
+			"}"})
+	}),
 	s("for",
 	{
 		t("for ("), i(1), t("; "), i(2), t("; "), i(3), t({")",
@@ -77,6 +91,13 @@ ls.add_snippets("cpp",
 		"{",
 			"\t"}), i(0), t({";",
 		"}"})
+	}),
+	s("struct",
+	{
+		t("struct "), i(1), t({"",
+		"{",
+		""}), i(2), t({"",
+		"};"})
 	}),
 	s("class",
 	{

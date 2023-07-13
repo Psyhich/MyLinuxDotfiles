@@ -1,4 +1,15 @@
-vim.cmd [[packadd packer.nvim]]
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
+
+local packer_bootstrap = ensure_packer()
 
 return require("packer").startup(function(use)
 	-- Make paq manage itself
@@ -19,7 +30,6 @@ return require("packer").startup(function(use)
 	-- Editor appereance
 		use "akinsho/bufferline.nvim"
 		use "NTBBloodbath/galaxyline.nvim" -- Status line in the bottom
-		use "ms-jpq/chadtree" -- File tree buffer
 		use "preservim/tagbar" -- Bar with all tags
 		-- Icons
 			use{
@@ -46,7 +56,7 @@ return require("packer").startup(function(use)
 		use "hrsh7th/cmp-nvim-lsp"
 		use "hrsh7th/cmp-nvim-lua"
 
-	-- Snippets [TODO]
+	-- Snippets
 		use "saadparwaiz1/cmp_luasnip"
 		use {
 				"L3MON4D3/LuaSnip",
@@ -80,7 +90,7 @@ return require("packer").startup(function(use)
 		use "rcarriga/nvim-dap-ui"
 		use {
 			"folke/trouble.nvim", -- Errors list
-			requires = "nvim-tree/nvim-web-devicons",
+			requires = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
 			config = function()
 				require("trouble").setup { }
 			end
@@ -101,4 +111,8 @@ return require("packer").startup(function(use)
 			requires = { {"nvim-lua/plenary.nvim"} }
 		}
 		use "nvim-telescope/telescope-ui-select.nvim"
+
+		if packer_bootstrap then
+			require('packer').sync()
+		end
 end)

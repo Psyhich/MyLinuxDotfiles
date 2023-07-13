@@ -77,6 +77,7 @@ cmp.setup({
 				end
 			},
 			{ name = 'luasnip' },
+			{ name = 'cmp_clangd' },
 		},
 		{
 			{ name = 'buffer' },
@@ -85,7 +86,19 @@ cmp.setup({
 				name = "dictionary",
 				keyword_length = 2,
 			},
-		})
+		}),
+	sorting = {
+		comparators = {
+			cmp.config.compare.offset,
+			cmp.config.compare.exact,
+			cmp.config.compare.recently_used,
+			require("clangd_extensions.cmp_scores"),
+			cmp.config.compare.kind,
+			cmp.config.compare.sort_text,
+			cmp.config.compare.length,
+			cmp.config.compare.order,
+		},
+	},
 })
 
 -- Set configuration for specific filetype.
@@ -118,13 +131,13 @@ local function default_on_attach(client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 
 	vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
-	vim.keymap.set("n", "K", "<cmd>:Lspsaga hover_doc ++quiet<CR>", opts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	vim.keymap.set("n", "<leader>sw", builtin.lsp_workspace_symbols, opts)
 	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
 	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
-	vim.keymap.set("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<leader>gr", builtin.lsp_references, opts)
-	vim.keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<CR>", opts)
+	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end
 
@@ -143,12 +156,15 @@ end
 local function cpp_bindings(client, bufnr)
 	default_on_attach(client, bufnr)
 	add_debuger_bindings(client, bufnr)
+
+	vim.keymap.set("n", "<leader>ss", ":ClangdSwitchSourceHeader<CR>", opts)
 end
 
 -- Set up lspconfig.
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local clangd_capabilities = cmp_capabilities
 clangd_capabilities.textDocument.completion.snippetSupport = false
+
 require("mason-lspconfig").setup_handlers {
 	function (server_name) -- default handler
 		require("lspconfig")[server_name].setup
@@ -189,7 +205,7 @@ require("mason-lspconfig").setup_handlers {
 				{
 					"clangd",
 					"--header-insertion=never",
-					"--completion-style=detailed"
+					"--completion-style=detailed",
 				}
 			},
 			extensions = {
@@ -198,6 +214,7 @@ require("mason-lspconfig").setup_handlers {
 				autoSetHints = true,
 				-- These apply to the default ClangdSetInlayHints command
 				inlay_hints = {
+					inline = true,
 					-- Only show inlay hints for the current line
 					only_current_line = false,
 					-- Event which triggers a refersh of the inlay hints.
@@ -254,7 +271,7 @@ require("mason-lspconfig").setup_handlers {
 				symbol_info = {
 					border = "none",
 				},
-			},
+			}
 		}
 	end
 }
