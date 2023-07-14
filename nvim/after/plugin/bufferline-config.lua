@@ -1,8 +1,11 @@
 -- Bufferline
-require("bufferline").setup({
+local bufferline = require('bufferline')
+bufferline.setup {
 	options = {
 		mode = "buffers", -- set to "tabs" to only show tabpages instead
+		style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
 		numbers = "none",
+		themable = true,
 		close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
 		right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
 		left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
@@ -20,7 +23,7 @@ require("bufferline").setup({
 		max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
 		truncate_names = true, -- whether or not tab names should be truncated
 		tab_size = 18,
-		diagnostics = "nvim_lsp",
+		diagnostics = false,
 		diagnostics_update_in_insert = false,
 		color_icons = true, -- whether or not to add the filetype icon highlights
 		show_buffer_icons = true, -- disable filetype icons for buffers
@@ -42,7 +45,7 @@ require("bufferline").setup({
 		},
 		sort_by = 'id'
 	}
-})
+}
 
 -- Tab manipulation
 vim.keymap.set("n", "<C-M-W>", ":BufferLinePickClose<CR>")

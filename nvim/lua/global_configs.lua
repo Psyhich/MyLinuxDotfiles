@@ -3,8 +3,6 @@
 vim.opt.relativenumber = true
 vim.opt.nu = true
 
---vim.cmd(":set langmap=йq,цw,уe,кr,еt,нy,гu,шi,щo,зp,х[,ї],фa,іs,вd,аf,пg,рh,оj,лk,дl,ж\\;,є',ґ\\,яz,чx,сc,мv,иb,тn,ьm,ю.,./,ЙQ,ЦW,УE,КR,ЕT,НY,НY,ГU,ШI,ЩO,ЗP,Х{,Ї},ФA,ІS,ВD,АF,ПG,РH,ОJ,ЛK,ДL,Ж\\:,Є\\\",Ґ<bar>,ЯZ,ЧX,СC,МV,ИB,ТN,ЬM,Б\\<,Ю>,№#")
-
 -- Spaces as tabs
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -14,7 +12,7 @@ vim.opt.shiftwidth = 4
 
 -- Appeareance
 vim.opt.termguicolors = true
-vim.cmd.colorscheme("carbonfox")
+vim.cmd.colorscheme("ayu-dark")
 -- vim.cmd(":hi Normal guibg=NONE")
 
 -- Tab appeareance

@@ -1,5 +1,8 @@
 local telescope = require("telescope")
 telescope.setup {
+	defaults = {
+		path_display = { "truncate" }
+	},
 	extensions = {
 		["ui-select"] = {
 			require("telescope.themes").get_dropdown {
@@ -16,7 +19,7 @@ telescope.setup {
 			}
 
 		}
-	}
+	},
 }
 
 telescope.load_extension("ui-select")

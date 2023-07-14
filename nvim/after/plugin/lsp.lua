@@ -77,7 +77,6 @@ cmp.setup({
 				end
 			},
 			{ name = 'luasnip' },
-			{ name = 'cmp_clangd' },
 		},
 		{
 			{ name = 'buffer' },
@@ -133,8 +132,8 @@ local function default_on_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 	vim.keymap.set("n", "<leader>sw", builtin.lsp_workspace_symbols, opts)
-	vim.keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
-	vim.keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 	vim.keymap.set("n", "<leader>gr", builtin.lsp_references, opts)
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
@@ -154,6 +153,8 @@ local function add_debuger_bindings(client, bufnr)
 end
 
 local function cpp_bindings(client, bufnr)
+	local opts = {buffer = bufnr, remap = false}
+
 	default_on_attach(client, bufnr)
 	add_debuger_bindings(client, bufnr)
 
@@ -164,6 +165,7 @@ end
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local clangd_capabilities = cmp_capabilities
 clangd_capabilities.textDocument.completion.snippetSupport = false
+
 
 require("mason-lspconfig").setup_handlers {
 	function (server_name) -- default handler
@@ -206,6 +208,7 @@ require("mason-lspconfig").setup_handlers {
 					"clangd",
 					"--header-insertion=never",
 					"--completion-style=detailed",
+					"--background-index"
 				}
 			},
 			extensions = {
@@ -215,13 +218,7 @@ require("mason-lspconfig").setup_handlers {
 				-- These apply to the default ClangdSetInlayHints command
 				inlay_hints = {
 					inline = true,
-					-- Only show inlay hints for the current line
 					only_current_line = false,
-					-- Event which triggers a refersh of the inlay hints.
-					-- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
-					-- not that this may cause  higher CPU usage.
-					-- This option is only respected when only_current_line and
-					-- autoSetHints both are true.
 					only_current_line_autocmd = "CursorHold",
 					-- whether to show parameter hints with the inlay hints or not
 					show_parameter_hints = true,
@@ -276,51 +273,16 @@ require("mason-lspconfig").setup_handlers {
 	end
 }
 
--- local util = require "lspconfig.util"
--- require("ccls").setup(
--- 	{
--- 		filetypes = { "c", "cpp", "objc", "objcpp", "opencl" },
--- 		root_dir = function(fname)
--- 			return util.root_pattern("compile_commands.json", "compile_flags.txt", ".git")(fname)
--- 			or util.find_git_ancestor(fname)
--- 		end,
--- 		init_options = {
--- 			cache =
--- 			{
--- 				vim.fs.normalize "~/.cache/ccls"
--- 			}
--- 		},
--- 		lsp = {
--- 			server = {
--- 				name = "ccls", --String name
--- 				cmd = {"/usr/bin/ccls"}, -- point to your binary, has to be a table
--- 				args = {--[[Any args table]] },
--- 				offset_encoding = "utf-32", -- default value set by plugin
--- 				root_dir = vim.fs.dirname(vim.fs.find({ "compile_commands.json", ".git" }, { upward = true })[1]), -- or some other function that returns a string
--- 				on_attach = on_attach,
--- 				capabilites = cmp_capabilities
--- 			},
--- 			codelens = {
--- 				enable = true,
--- 				events = {"BufWritePost", "InsertLeave"}
--- 			},
--- 			-- Uncomment to enable coexistance with clangd
--- 			-- disable_capabilities = {
--- 			-- 	completionProvider = true,
--- 			-- 	documentFormattingProvider = true,
--- 			-- 	documentRangeFormattingProvider = true,
--- 			-- 	documentHighlightProvider = true,
--- 			-- 	documentSymbolProvider = true,
--- 			-- 	workspaceSymbolProvider = true,
--- 			-- 	renameProvider = true,
--- 			-- 	hoverProvider = true,
--- 			-- 	codeActionProvider = true,
--- 			-- },
--- 			-- disable_diagnostics = true,
--- 			-- disable_signature = true,
--- 		}
--- 	})
-require("lspsaga").setup {}
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+		null_ls.builtins.diagnostics.clang_check,
+		null_ls.builtins.diagnostics.cspell,
+		null_ls.builtins.diagnostics.cppcheck,
+		null_ls.builtins.code_actions.cspell,
+		null_ls.builtins.completion.spell,
+    },
+})
 
 require("neodev").setup{
 	library = { plugins = { "nvim-dap-ui" }, types = true },

@@ -15,82 +15,110 @@ return require("packer").startup(function(use)
 	-- Make paq manage itself
 		use "wbthomason/packer.nvim"
 
-	-- Libs
-		use "xolox/vim-misc"
-		use "sharkdp/fd"
-		use "roxma/nvim-yarp"
-		use "roxma/vim-hug-neovim-rpc"
-		use "neomake/neomake"
-		use "BurntSushi/ripgrep"
+	local devicons = {
+		"kyazdani42/nvim-web-devicons",
+		config = function ()
+			require"nvim-web-devicons".setup {}
+		end
+	}
+	local plenary = "nvim-lua/plenary.nvim"
 
 	-- Search utils
-		use "junegunn/fzf"
-		use "junegunn/fzf.vim"  -- to enable preview (optional)
+		use
+		{
+			{
+				"nvim-telescope/telescope.nvim", tag = "0.1.2",
+				requires = {
+					"junegunn/fzf",
+					"junegunn/fzf.vim",
+					"BurntSushi/ripgrep",
+					plenary,
+					"sharkdp/fd",
+					devicons,
+					{
+						"nvim-telescope/telescope-fzf-native.nvim",
+						run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build"
+					}
+				}
+			},
+			{ "nvim-telescope/telescope-ui-select.nvim" }
+		}
 
 	-- Editor appereance
-		use "akinsho/bufferline.nvim"
-		use "NTBBloodbath/galaxyline.nvim" -- Status line in the bottom
-		use "preservim/tagbar" -- Bar with all tags
-		-- Icons
-			use{
-				"kyazdani42/nvim-web-devicons",
-				config = function ()
-					require"nvim-web-devicons".setup {}
-				end
-			}
-			use "ryanoasis/vim-devicons"
-			use "onsails/lspkind-nvim" -- Icons for completion
-
-	-- LSP and code analysis
-		use({"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"})
-		use "nvim-treesitter/nvim-treesitter-context"
-	-- lspconfig
-		use "neovim/nvim-lspconfig"
-		use "tami5/lspsaga.nvim" -- prettier LSP windows
-
-	-- Completion
-		use "hrsh7th/nvim-cmp"
-		use "hrsh7th/cmp-buffer"
-		use "hrsh7th/cmp-path"
-		use "uga-rosa/cmp-dictionary"
-		use "hrsh7th/cmp-nvim-lsp"
-		use "hrsh7th/cmp-nvim-lua"
-
-	-- Snippets
-		use "saadparwaiz1/cmp_luasnip"
 		use {
-				"L3MON4D3/LuaSnip",
-				run = "make install_jsregexp"
+			"akinsho/bufferline.nvim",
+			requires = {
+				devicons,
 			}
-		use "rafamadriz/friendly-snippets"
+		}
 
-	-- LSP managers
-		use "williamboman/mason.nvim"
-		use "williamboman/mason-lspconfig.nvim"
-		use "jay-babu/mason-nvim-dap.nvim"
+		use {
+			"nvim-lualine/lualine.nvim",
+			requires = { devicons },
+		}
+	-- Icons
+		use {
+			devicons,
+			{ "onsails/lspkind-nvim" }
+		}
 
-	-- External LSPs
-		use "p00f/clangd_extensions.nvim"
-		use "ranjithshegde/ccls.nvim"
-		use "folke/neodev.nvim" -- Helper for editing NeoVim Lua configurations
+	-- Code highlight
+		use {
+			{
+				"nvim-treesitter/nvim-treesitter",
+				run = ":TSUpdate"
+			},
+			{ "nvim-treesitter/nvim-treesitter-context" },
+			{ "p00f/nvim-ts-rainbow" }
+		}
 
+	-- LSP
+		use {
+			{ "neovim/nvim-lspconfig" },
+			{ "p00f/clangd_extensions.nvim" },
+			{ "folke/neodev.nvim" },
+			{ "jose-elias-alvarez/null-ls.nvim" },
+			{ "williamboman/mason.nvim", run = ":MasonUpdate" },
+			{ "williamboman/mason-lspconfig.nvim" },
+			{ "jayp0521/mason-null-ls.nvim" },
+			{ "jay-babu/mason-nvim-dap.nvim" },
+		}
+		use "numToStr/Comment.nvim" -- Coments
 		use "rhysd/vim-grammarous" -- Gramma check
 
-		use "numToStr/Comment.nvim" -- Coments
+	-- Completion
+		use {
+			"hrsh7th/nvim-cmp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"uga-rosa/cmp-dictionary",
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua"
+		}
 
-	-- Highlight
-		use "spywhere/detect-language.nvim" -- Language autodetect
-		use "norcalli/nvim-colorizer.lua" -- Color highlight
-		use "p00f/nvim-ts-rainbow" -- Rainbow parentheses
+	-- Snippets
+		use {
+			{
+				"L3MON4D3/LuaSnip",
+				run = "make install_jsregexp"
+			},
+			"saadparwaiz1/cmp_luasnip",
+		}
 
 	-- IDE features [TODO]
 		use "mhartington/formatter.nvim"
-		use "mfussenegger/nvim-dap" -- Debug adapter
-		use "theHamsta/nvim-dap-virtual-text"
-		use "rcarriga/nvim-dap-ui"
+		use "tpope/vim-fugitive" -- Git
+
+	-- Debug adapter
+		use {
+			"mfussenegger/nvim-dap",
+			"theHamsta/nvim-dap-virtual-text",
+			"rcarriga/nvim-dap-ui"
+		}
+
 		use {
 			"folke/trouble.nvim", -- Errors list
-			requires = { "nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim" },
+			requires = { devicons, plenary },
 			config = function()
 				require("trouble").setup { }
 			end
@@ -98,19 +126,11 @@ return require("packer").startup(function(use)
 		use "Civitasv/cmake-tools.nvim"
 
 	-- Coloschemes
-		use "Shatur/neovim-ayu"
-		use "EdenEast/nightfox.nvim"
-		use "folke/tokyonight.nvim"
-		use "rebelot/kanagawa.nvim"
-
-	-- Git support
-		use "tpope/vim-fugitive"
-		use
-		{
-			"nvim-telescope/telescope.nvim", tag = "0.1.0",
-			requires = { {"nvim-lua/plenary.nvim"} }
+		use {
+			"Shatur/neovim-ayu",
+			"EdenEast/nightfox.nvim",
+			"rebelot/kanagawa.nvim"
 		}
-		use "nvim-telescope/telescope-ui-select.nvim"
 
 		if packer_bootstrap then
 			require('packer').sync()
