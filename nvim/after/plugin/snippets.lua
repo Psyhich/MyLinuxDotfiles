@@ -129,6 +129,11 @@ ls.add_snippets("cpp",
 		"#define "}), f(reuse, {1}, {user_args = {1}}), t({"",
 		"#endif // "}), f(reuse, {1}, {user_args = {1}})
 	}),
+
+	s("unimplemented",
+	{
+		t("throw std::runtime_error{\"Unimplemented!\"};")
+	}),
 })
 
 ls.add_snippets("cmake", {

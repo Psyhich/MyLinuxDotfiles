@@ -159,13 +159,15 @@ local function cpp_bindings(client, bufnr)
 	add_debuger_bindings(client, bufnr)
 
 	vim.keymap.set("n", "<leader>ss", ":ClangdSwitchSourceHeader<CR>", opts)
+
+	require("clangd_extensions.inlay_hints").setup_autocmd()
+	require("clangd_extensions.inlay_hints").set_inlay_hints()
 end
 
 -- Set up lspconfig.
 local cmp_capabilities = require('cmp_nvim_lsp').default_capabilities()
 local clangd_capabilities = cmp_capabilities
 clangd_capabilities.textDocument.completion.snippetSupport = false
-
 
 require("mason-lspconfig").setup_handlers {
 	function (server_name) -- default handler
@@ -198,89 +200,66 @@ require("mason-lspconfig").setup_handlers {
 		}
 	end,
 	["clangd"] = function ()
-		require("clangd_extensions").setup
-		{
-			server = {
-				capabilities = clangd_capabilities,
-				on_attach = cpp_bindings,
-				cmd =
-				{
-					"clangd",
-					"--header-insertion=never",
-					"--completion-style=detailed",
-					"--background-index"
-				}
-			},
-			extensions = {
-				-- defaults:
-				-- Automatically set inlay hints (type hints)
-				autoSetHints = true,
-				-- These apply to the default ClangdSetInlayHints command
-				inlay_hints = {
-					inline = true,
-					only_current_line = false,
-					only_current_line_autocmd = "CursorHold",
-					-- whether to show parameter hints with the inlay hints or not
-					show_parameter_hints = true,
-					-- prefix for parameter hints
-					parameter_hints_prefix = "<- ",
-					-- prefix for all the other hints (type, chaining)
-					other_hints_prefix = "=> ",
-					-- whether to align to the length of the longest line in the file
-					max_len_align = false,
-					-- padding from the left if max_len_align is true
-					max_len_align_padding = 1,
-					-- whether to align to the extreme right or not
-					right_align = false,
-					-- padding from the right if right_align is true
-					right_align_padding = 7,
-					-- The color of the hints
-					highlight = "Comment",
-					-- The highlight group priority for extmark
-					priority = 100,
-				},
-				ast = {
-					-- These are unicode, should be available in any font
-					role_icons = {
-						 type = "🄣",
-						 declaration = "🄓",
-						 expression = "🄔",
-						 statement = ";",
-						 specifier = "🄢",
-						 ["template argument"] = "🆃",
-					},
-					kind_icons = {
-						Compound = "C",
-						Recovery = "R",
-						TranslationUnit = "U",
-						PackExpansion = "P",
-						TemplateTypeParm = "T",
-						TemplateTemplateParm = "T",
-						TemplateParamObject = "T",
-					},
-					highlights = {
-						detail = "Comment",
-					},
-				},
-				memory_usage = {
-					border = "none",
-				},
-				symbol_info = {
-					border = "none",
-				},
+		require("lspconfig").clangd.setup{
+			capabilities = clangd_capabilities,
+			on_attach = cpp_bindings,
+			cmd =
+			{
+				"clangd",
+				"--header-insertion=never",
+				"--completion-style=detailed",
+				"--background-index"
 			}
 		}
+		require("clangd_extensions").setup({
+			inlay_hints = {
+				inline = true,
+				-- Options other than `highlight' and `priority' only work
+				-- if `inline' is disabled
+				-- Only show inlay hints for the current line
+				only_current_line = false,
+				-- Event which triggers a refresh of the inlay hints.
+				-- You can make this { "CursorMoved" } or { "CursorMoved,CursorMovedI" } but
+				-- not that this may cause  higher CPU usage.
+				-- This option is only respected when only_current_line and
+				-- autoSetHints both are true.
+				only_current_line_autocmd = { "CursorHold" },
+				-- whether to show parameter hints with the inlay hints or not
+				show_parameter_hints = true,
+				-- prefix for parameter hints
+				parameter_hints_prefix = "<- ",
+				-- prefix for all the other hints (type, chaining)
+				other_hints_prefix = "=> ",
+				-- whether to align to the length of the longest line in the file
+				max_len_align = false,
+				-- padding from the left if max_len_align is true
+				max_len_align_padding = 1,
+				-- whether to align to the extreme right or not
+				right_align = false,
+				-- padding from the right if right_align is true
+				right_align_padding = 7,
+				-- The color of the hints
+				highlight = "Comment",
+				-- The highlight group priority for extmark
+				priority = 100,
+			},
+			memory_usage = {
+				border = "none",
+			},
+			symbol_info = {
+				border = "none",
+			},
+		})
+
 	end
 }
 
 local null_ls = require("null-ls")
 null_ls.setup({
     sources = {
-		null_ls.builtins.diagnostics.clang_check,
+		-- null_ls.builtins.diagnostics.clang_check,
 		null_ls.builtins.diagnostics.cspell,
-		null_ls.builtins.diagnostics.cppcheck,
 		null_ls.builtins.code_actions.cspell,
-		null_ls.builtins.completion.spell,
     },
 })
 

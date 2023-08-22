@@ -2,11 +2,12 @@ local cmake_tools = require("cmake-tools")
 
 require("cmake-tools").setup {
   cmake_command = "cmake", -- this is used to specify cmake command path
+  cmake_regenerate_on_save = false, -- auto generate when save CMakeLists.txt
   cmake_generate_options = {
 	  "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON"
   },
   cmake_build_options = { "-j" }, -- this will be passed when invoke `CMakeBuild`
-  cmake_build_directory = "", -- this is used to specify generate directory for cmake
+  cmake_build_directory = "build", -- this is used to specify generate directory for cmake
   cmake_build_directory_prefix = "build_", -- when cmake_build_directory is set to "", this option will be activated
   cmake_soft_link_compile_commands = true, -- this will automatically make a soft link from compile commands file to project root dir
   cmake_compile_commands_from_lsp = false, -- this will automatically set compile commands file location using lsp, to use it, please set `cmake_soft_link_compile_commands` to false
@@ -58,7 +59,12 @@ quickfix.close = function()
 	vim.cmd[[:TroubleClose]]
 end
 
-vim.keymap.set("n", "<leader>bb",
+vim.keymap.set("n", "<leader>cb",
 	function ()
 		cmake_tools.build({})
+	end)
+
+vim.keymap.set("n", "<leader>cr",
+	function ()
+		cmake_tools.run({})
 	end)

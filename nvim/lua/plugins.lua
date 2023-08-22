@@ -53,7 +53,7 @@ return require("packer").startup(function(use)
 		}
 
 		use {
-			"nvim-lualine/lualine.nvim",
+			"nvim-lualine/lualine.nvim", -- TODO add status line integration with other utilities
 			requires = { devicons },
 		}
 	-- Icons
@@ -106,7 +106,7 @@ return require("packer").startup(function(use)
 		}
 
 	-- IDE features [TODO]
-		use "mhartington/formatter.nvim"
+		use "mhartington/formatter.nvim" -- TODO: Add integration with formatters
 		use "tpope/vim-fugitive" -- Git
 
 	-- Debug adapter
@@ -129,7 +129,7 @@ return require("packer").startup(function(use)
 		use {
 			"Shatur/neovim-ayu",
 			"EdenEast/nightfox.nvim",
-			"rebelot/kanagawa.nvim"
+			"rebelot/kanagawa.nvim",
 		}
 
 		if packer_bootstrap then
