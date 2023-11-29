@@ -27,7 +27,7 @@ return require("packer").startup(function(use)
 		use
 		{
 			{
-				"nvim-telescope/telescope.nvim", tag = "0.1.2",
+				"nvim-telescope/telescope.nvim", tag = "0.1.4",
 				requires = {
 					"junegunn/fzf",
 					"junegunn/fzf.vim",
@@ -75,13 +75,13 @@ return require("packer").startup(function(use)
 	-- LSP
 		use {
 			{ "neovim/nvim-lspconfig" },
-			{ "p00f/clangd_extensions.nvim" },
 			{ "folke/neodev.nvim" },
-			{ "jose-elias-alvarez/null-ls.nvim" },
 			{ "williamboman/mason.nvim", run = ":MasonUpdate" },
 			{ "williamboman/mason-lspconfig.nvim" },
-			{ "jayp0521/mason-null-ls.nvim" },
 			{ "jay-babu/mason-nvim-dap.nvim" },
+		}
+		use {
+			"p00f/clangd_extensions.nvim",
 		}
 		use "numToStr/Comment.nvim" -- Coments
 		use "rhysd/vim-grammarous" -- Gramma check

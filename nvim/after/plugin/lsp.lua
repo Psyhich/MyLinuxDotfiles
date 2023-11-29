@@ -21,14 +21,6 @@ cmp.setup({
 	},
 	formatting = {
 		fields = { "kind", "abbr", "menu"},
-		format = function(entry, vim_item)
-			local kind = require("lspkind").cmp_format(
-				{mode = "symbol", maxwidth = 50})(entry, vim_item)
-			local strings = vim.split(kind.kind, "%s", { trimempty = true })
-			kind.kind = strings[1] or ""
-
-			return kind
-		end,
 	},
 	snippet = {
 		expand = function(args)
@@ -119,7 +111,6 @@ require("mason-lspconfig").setup(
 			"tsserver",
 			"eslint",
 			"lua_ls",
-			"pylsp",
 			"clangd",
 			"omnisharp",
 		}
@@ -208,7 +199,9 @@ require("mason-lspconfig").setup_handlers {
 				"clangd",
 				"--header-insertion=never",
 				"--completion-style=detailed",
-				"--background-index"
+				"--background-index",
+				"--clang-tidy",
+				"--all-scopes-completion"
 			}
 		}
 		require("clangd_extensions").setup({
@@ -253,15 +246,6 @@ require("mason-lspconfig").setup_handlers {
 
 	end
 }
-
-local null_ls = require("null-ls")
-null_ls.setup({
-    sources = {
-		-- null_ls.builtins.diagnostics.clang_check,
-		null_ls.builtins.diagnostics.cspell,
-		null_ls.builtins.code_actions.cspell,
-    },
-})
 
 require("neodev").setup{
 	library = { plugins = { "nvim-dap-ui" }, types = true },
