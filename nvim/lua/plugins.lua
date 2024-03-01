@@ -41,7 +41,12 @@ return require("packer").startup(function(use)
 					}
 				}
 			},
-			{ "nvim-telescope/telescope-ui-select.nvim" }
+			{ "nvim-telescope/telescope-ui-select.nvim" },
+			{
+				"ThePrimeagen/harpoon",
+				branch = "harpoon2",
+				requires = { {"nvim-lua/plenary.nvim"} }
+			}
 		}
 
 	-- Editor appereance
@@ -108,6 +113,9 @@ return require("packer").startup(function(use)
 	-- IDE features [TODO]
 		use "mhartington/formatter.nvim" -- TODO: Add integration with formatters
 		use "tpope/vim-fugitive" -- Git
+		use {
+			"stevearc/overseer.nvim", -- Runs task and checks their status
+		}
 
 	-- Debug adapter
 		use {

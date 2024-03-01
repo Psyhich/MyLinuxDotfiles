@@ -243,8 +243,12 @@ require("mason-lspconfig").setup_handlers {
 				border = "none",
 			},
 		})
-
 	end
+}
+
+require("lspconfig").hls.setup {
+	capabilities = cmp_capabilities,
+	on_attach = default_on_attach,
 }
 
 require("neodev").setup{

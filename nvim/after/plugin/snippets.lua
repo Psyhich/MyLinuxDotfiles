@@ -184,5 +184,26 @@ ls.add_snippets("tex", {
 	}),
 	s("emph", {
 		t("\\emph{"), i(1), t("}")
+	}),
+	s("enumerate", {
+		t({
+			"\\begin{enumerate}",
+			"\t\\item "
+		}),
+		i(1),
+		t({
+			"",
+			"\\end{enumerate}"
+		})
+	}),
+	s("description", {
+		t({
+			"\\begin{description}",
+			"\t\\item["
+		}),
+		i(1),
+		t("] "),
+		i(2),
+		t({"", "\\end{description}"})
 	})
 })
